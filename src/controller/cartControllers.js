@@ -30,13 +30,13 @@ return res.status(500).json({
 }
 
 async function modifyProductToCart(req,res){
-    console.log("Remove Items->>>>>",req.params);
+    console.log("Remove Items->>>>>");
 
     try{
 const cart=await modifyCart(req.user.id,req.params.productId,req.params.operation=='add');
 return res.status(201).json({
 success:true,
-massage:"Successfully add to Cart!!!",
+massage:"Successfully add to Cart!!!", //////
 error:{},
 data:cart,
 })

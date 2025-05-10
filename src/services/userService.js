@@ -2,30 +2,52 @@ const {findUser,createUser}=require('../reprositories/userRepository');
 const {createCart}=require('../reprositories/cartRepository');
 class UserService{
 ///
-async registerUser(userDetails){
-const user=await findUser(
-{email:userDetails.email,
-mobileNumber : userDetails.mobileNumber,
+async registerUser(userDetails) {
+    try {
+
+        // Check if user already exists
+        const user_email = await findUser({
+            email: userDetails.email,
+        });
+        if (user_email) {
+            throw { reason: 'User with this  email already exists!', statusCode: 400 };
+        }
+        const user_mobile = await findUser({
+            mobileNumber: userDetails.mobileNumber,
+        });
+
+        // If user exists, throw a 400 error
+        if (user_mobile) {
+            throw { reason: 'User with this same mobile number  already exists!', statusCode: 400 };
+        }
+
+        // Create a new user
+        const newUser = await createUser({
+            email: userDetails.email,
+            password: userDetails.password,
+            firstName: userDetails.firstName,
+            mobileNumber: userDetails.mobileNumber,
+            role: userDetails.role,
+        });
+
+        // If user creation fails, throw a 500 error
+        if (!newUser) {
+            throw { reason: 'Something went wrong, cannot create user', statusCode: 500 };
+        }
+
+        // Create a cart for the user
+        await createCart(newUser._id);
+
+        // Return newly created user
+        return newUser;
+    } catch (error) {
+        // Throw error to be handled by the controller
+        console.log(error)
+        throw error;
+    }
 }
-);
-if(user){
-    throw{reason:'User with the same mobile number and email already exists!!! ',statusCode:400};
-}
-const newUser=await createUser({
-    email:userDetails.email,
-    password:userDetails.password,
-    firstName:userDetails.firstName,
-   // lastName:userDetails.lastName,
-    mobileNumber:userDetails.mobileNumber,
-    role:userDetails.role,
-   // address:userDetails.address,
-})
-if(!newUser){
-    throw{reason:'Something went wrong ,cannot create user',statusCode:500};
-}
-await createCart(newUser._id);
-return newUser;
-} 
+
+
 }
 module.exports=UserService;
 

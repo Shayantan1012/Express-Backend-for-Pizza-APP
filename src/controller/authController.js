@@ -15,9 +15,11 @@ return res.status(200).json({
     }
 )
 }
+
+
+
 async function login(req,res){
 const loginPayload=req.body;
-
  try{
 const response=await loginUser(loginPayload);
 res.cookie("authToken",response.token,{

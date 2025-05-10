@@ -9,14 +9,6 @@ const userSchema=new mongoose.Schema({
         trim:[true],
         maxlength:[20,"First name must be less than or equal to 20 charecters!!!"],
     },
-    lastName:{
-        type:String,
-       // require:[true,"The Firstname is required!!!"],
-        minlength:[5,"The Name must be minimum 5 charecters!!!"],
-        lowercase:[true],
-        trim:[true],
-        maxlength:[20,"First name must be less than or equal to 20 charecters!!!"],
-    },
     mobileNumber:{
         type:String,
         trim:[true],

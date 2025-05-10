@@ -1,8 +1,8 @@
 const {createProduct,getProductById,deleteProductById, getAllProductsData}=require('../services/productService');
 const AppError = require('../utils/appError');
  async function addProduct(req,res){
-console.log("--------------->",req.body)
 try{
+
     const product=await createProduct({
         productName:req.body.productName,
         description:req.body.description,
@@ -12,6 +12,8 @@ try{
         imagePath:req.file?.path,
         quantity:req.body.quantity,
     })
+    console.log("---------->>>>",product);
+
     return res.status(201).json({
         success:true,
         message:"Successfully created the product!!!",

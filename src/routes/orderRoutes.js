@@ -9,4 +9,5 @@ orderRoute.get('/',isLoggedIn,(req,res)=>getOrderByUser(req,res));
 orderRoute.get('/:orderId',isLoggedIn,(req,res)=>getOrder(req,res));
 orderRoute.put('/:orderId/cancel',isLoggedIn,(req,res)=>cancelOrder(req,res));
 orderRoute.put('/:orderId/status',isLoggedIn,isAdmin,(req,res)=>changeOrderStatus(req,res));
+
 module.exports=orderRoute;

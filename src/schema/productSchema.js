@@ -3,7 +3,7 @@ const productSchema=new mongoose.Schema({
     productName:{
         type:String,
         require:[true,"Please give the product Name!!!"],
-        maxlength:[20,"First name must be less than or equal to 20 charecters!!!"],
+        // maxlength:[50,"First name must be less than or equal to 20 charecters!!!"],
         trim:true,
     },
     description:{

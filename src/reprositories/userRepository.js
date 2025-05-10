@@ -3,9 +3,11 @@ const User=require('../schema/useSchema');
 async function findUser(parameters) {
     try{ 
         const response=await User.findOne({...parameters});
+
         return response;
     }catch(error){
-console.log(error);
+console.log("This is repository--->",error);
+return { success: false, error: error.message };
     }
 } /////
 async function createUser(userDetails){
@@ -14,7 +16,7 @@ async function createUser(userDetails){
         return userResponse;        
     }
 catch(error){
-    console.log(error);
+    return { success: false, error: error.message }; // Retu
 }
 }
 

@@ -5,8 +5,9 @@ const InternalServerError = require('../utils/internalServerError');
 const NotFoundError = require('../utils/notFoundError');
 
 async function createProduct(productDetails){
+    
 const imagePath=productDetails.imagePath;
-console.log(imagePath);
+console.log("-------------Check-------->",imagePath);
 if(imagePath){
     try{    const cloudanaryResponse= await  cloudinary.uploader.upload(imagePath);
             console.log(cloudanaryResponse);

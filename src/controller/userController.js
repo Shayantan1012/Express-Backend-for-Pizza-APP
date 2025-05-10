@@ -1,8 +1,6 @@
 const UserService=require('../services/userService');
 
  async function createUser(req,res){
-    console.log("Create User Control called!!");
-    console.log(req.body);
     const userService= new UserService();
     try{ 
     const response=await userService.registerUser(req.body);
@@ -13,12 +11,10 @@ const UserService=require('../services/userService');
         error:{},
     })
 }catch(error){
-    return res.status(error.statusCode).json({
-        success:false,
-        message:error.reason,
-        data:{},
-        error:error,
-    })
+    res.status(error.statusCode || 500).json({
+        success: false,
+        error: error.reason || 'Internal Server Error',
+    });
 }
 }
 module.exports={createUser};

@@ -6,7 +6,7 @@ async function createProduct(productDetails){
     try{
 
         const response=await Product.create(productDetails);
-
+console.log("This is response",response);
         return response;        
     }
 catch(error){

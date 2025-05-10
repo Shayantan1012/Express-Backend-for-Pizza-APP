@@ -13,10 +13,8 @@ if(!token){
         message:"No Auth token Provided!!!",
     })
 }
-console.log("This is token->",token);
 try{
 var decoded=jwt.verify(token,JWT_SECRET);
-console.log("this is decoded res->",decoded);
 
 req.user={
     email:decoded.email,
@@ -84,4 +82,3 @@ else{
 module.exports={
     isLoggedIn,isAdmin
 }
-////
