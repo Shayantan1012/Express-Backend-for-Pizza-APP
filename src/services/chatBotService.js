@@ -101,7 +101,7 @@ async function handleWebhookRequest (req, res) {
       requestedProduct = agent.parameters['food-item'].map(product=>product.toLowerCase().replace(/\s+/g, ''));
       productsQuantity=agent.parameters['number']
       const quantity=agent.parameters['quantity']
-  
+  ///
         if(quantity.length!=0){
           agent.add('Please dont use article or noun phrase like:');
           agent.add('I want a couple of burgers. Instead use: I want 2/two burgers');
